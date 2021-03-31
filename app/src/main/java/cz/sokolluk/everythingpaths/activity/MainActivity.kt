@@ -1,12 +1,13 @@
 package cz.sokolluk.everythingpaths.activity
 
-import android.app.Activity
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import cz.sokolluk.everythingpaths.board.Game
-import cz.sokolluk.everythingpaths.R
-import kotlinx.android.synthetic.main.activity_main.*
+import cz.sokolluk.everythingpaths.board.generator.BinaryTreeGenerator
 
-class MainActivity: Activity() {
+
+class MainActivity: ComponentActivity() {
 
     val game by lazy {
         Game(Game.WindowProps.getFromActivity(this))
@@ -15,13 +16,8 @@ class MainActivity: Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
-
-        game.initialize(boardDesk)
-
-        exitButton.setOnClickListener {
-            finish()
+        setContent {
+            game.InitGame(BinaryTreeGenerator())
         }
-
     }
 }
